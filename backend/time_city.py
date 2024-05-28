@@ -1,7 +1,9 @@
 import requests
-import time
+from datetime import datetime
 
 def get_time(city):
-    response = requests.get("http://worldtimeapi.org/api/timezone/{city}")
+    response = requests.get(f"http://worldtimeapi.org/api/timezone/{city}")
     data = response.json()
-    return data['datetime']
+    datetime_str = data.get("datetime", "")
+    return datetime.fromisoformat(datetime_str)
+
